@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+if (getenv('VERCEL')) {
+    $temporarySessionPath = sys_get_temp_dir();
+
+    if (is_dir($temporarySessionPath) && is_writable($temporarySessionPath)) {
+        session_save_path($temporarySessionPath);
+    }
+}
+
 session_start();
 
 define('BASE_PATH', dirname(__DIR__, 2));

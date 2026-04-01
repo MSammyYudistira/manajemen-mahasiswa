@@ -29,3 +29,24 @@ Aplikasi web pengelolaan data mahasiswa berbasis PHP native, MySQL, dan Bootstra
 - Jika domain/path hosting berbeda, ubah `APP_BASE_URL` atau nilai `base_url` di [app/config/app.php](C:\laragon\www\manajemen-mahasiswa\app\config\app.php).
 - Upload semua file project via FTP lalu import `database/schema.sql` pada database hosting.
 - Pastikan PHP hosting mendukung `PDO`, `pdo_mysql`, dan `password_hash`.
+
+## Deploy ke Vercel
+
+Project ini bisa dijalankan di Vercel dengan community PHP runtime melalui [vercel.json](C:\laragon\www\manajemen-mahasiswa\vercel.json), tetapi ada syarat penting:
+
+- Database tidak bisa memakai MySQL lokal Laragon. Gunakan MySQL publik/managed.
+- Isi environment variable Vercel: `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+- Untuk production di root domain, set `APP_BASE_URL` menjadi kosong.
+- Session di Vercel diarahkan ke temporary directory lewat [app/helpers/bootstrap.php](C:\laragon\www\manajemen-mahasiswa\app\helpers\bootstrap.php).
+
+Perintah deploy dasar:
+
+```bash
+npx vercel
+```
+
+Untuk production:
+
+```bash
+npx vercel --prod
+```
